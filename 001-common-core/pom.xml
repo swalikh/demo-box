@@ -47,7 +47,7 @@
             <version>2.8.0</version>
         </dependency>
 
-        <!--004-fastjson依赖-->
+        <!--004-fastjson依赖 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>

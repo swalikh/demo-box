@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--父引用-->
+    <parent>
+        <artifactId>demo-box</artifactId>
+        <groupId>com.swalikh</groupId>
+        <version>v5.0</version>
+    </parent>
+
+
+    <!--本模块内容-->
+    <groupId>com.swalikh</groupId>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>002-spring-quartz</artifactId>
+    <version>v5.0</version>
+    <description>本工程是一个动态创建和编辑定时任务的Demo，可以用于监控，定时任务等业务上</description>
+
+
+    <!--按需求引入-->
+    <dependencies>
+        <dependency>
+            <groupId>com.swalikh</groupId>
+            <artifactId>00101-kernel</artifactId>
+            <version>v5.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.18</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+    </dependencies>
+</project>

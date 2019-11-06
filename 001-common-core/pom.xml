@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--父引用-->
+    <parent>
+        <artifactId>demo-box</artifactId>
+        <groupId>com.swalikh</groupId>
+        <version>v5.0</version>
+    </parent>
+
+    <!--本模块内容-->
+    <artifactId>001-common-core</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+    <version>v5.0</version>
+    <packaging>pom</packaging>
+    <description>核心的依赖，主要包含工具类，测试依赖，异常处理，公共服务类，公共的配置类</description>
+
+
+    <!--包含的子模块-->
+    <modules>
+        <module>00101-kernel</module>
+    </modules>
+
+    <dependencies>
+
+        <!--001-lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--002-swagger依赖-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
+        <!--003-swaggerUI依赖-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+
+        <!--004-fastjson依赖-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.62</version>
+        </dependency>
+
+
+    </dependencies>
+
+</project>

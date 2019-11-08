@@ -1,7 +1,7 @@
 package com.swalikh.demo.quartz.controller;
 
 import com.swalikh.demo.quartz.service.JobService;
-import com.swalikh.kernel.utils.Result;
+import com.swalikh.kernel.exception.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,14 @@ public class JobController {
                          @RequestParam(value = "jobGroupName") String jobGroupName,
                          @RequestParam(value = "cronExpression") String cronExpression, @RequestParam(value = "desc") String desc) {
         jobServiceImpl.addJob(jobName, jobClassName, jobGroupName, cronExpression, desc);
+        return Result.ok("OK");
+    }
+
+    @ApiOperation("异常")
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    @ResponseBody
+    public Result addJob() {
+        int a = 1/0;
         return Result.ok("OK");
     }
 

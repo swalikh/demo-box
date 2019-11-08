@@ -15,6 +15,12 @@
     <modelVersion>4.0.0</modelVersion>
     <version>v5.0</version>
     <packaging>jar</packaging>
-    <description>包含工具类，测试依赖，异常处理</description>
+    <description>包含工具类，测试依赖，全局异常处理</description>
+
+<!--依赖-->
+    <dependencies>
+
+    </dependencies>
+
 
 </project>

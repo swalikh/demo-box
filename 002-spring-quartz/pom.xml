@@ -21,32 +21,36 @@
 
     <!--按需求引入-->
     <dependencies>
+
         <dependency>
             <groupId>com.swalikh</groupId>
             <artifactId>00101-kernel</artifactId>
             <version>v5.0</version>
         </dependency>
-        
+
+<!--quartz依赖======== 001.starter ======-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
-
+<!--quartz依赖======== 002.c3p0连接池 ======-->
         <dependency>
             <groupId>c3p0</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.1.2</version>
         </dependency>
-
+<!--quartz依赖======== 003.mysql驱动 ======-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.18</version>
         </dependency>
 
+<!--整合JPA用于数据存储-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.swalikh</groupId>
+            <artifactId>00102-base-jpa</artifactId>
+            <version>v5.0</version>
         </dependency>
 
     </dependencies>

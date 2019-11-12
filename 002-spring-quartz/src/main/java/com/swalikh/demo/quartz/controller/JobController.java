@@ -79,9 +79,10 @@ public class JobController {
     @ApiOperation("查询任务")
     @RequestMapping(value = "/job", method = RequestMethod.GET)
     @ResponseBody
-    public Result queryJob(@RequestParam(value = "queryKey") String queryKey,
-                           @RequestParam(value = "status") String status) {
-        List list = jobServiceImpl.queryJob(queryKey, status);
+    public Result queryJob(@RequestParam(value = "jobName",required = false) String jobName,
+                           @RequestParam(value = "groupName",required = false) String jobGroupName,
+                           @RequestParam(value = "status",required = false) String status) {
+        List list = jobServiceImpl.queryJob(jobGroupName, jobName,status);
         return Result.buildOk("OK",list);
     }
 

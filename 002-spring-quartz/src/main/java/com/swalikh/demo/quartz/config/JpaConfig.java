@@ -16,18 +16,27 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories(basePackages={"com.swalikh"}) //这个是你Repositorie所在的包
+@EnableJpaRepositories(basePackages={JpaConfig.BASEPACKEAGE_REPOSITORY_SCAN}) //
 @EnableTransactionManagement //这个是事务
 public class JpaConfig{
 
-    @Primary //springboot默认是多数据源，所以你要指定一个主数据源，不然会错误
+
+    //--001.这个是你Repositorie所在的包
+    public static final String BASEPACKEAGE_REPOSITORY_SCAN = "com.swalikh.demo.quartz.repository";
+    //--002.这个是你entity所在的包
+    public static final String BASEPACKEAGE_ENTITY_SCAN = "com.swalikh.demo.quartz.entity";
+    //--003.这个是你的datasource springboot默认是多数据源
+    public static final String DATASOURCE = "spring.datasource.hikari";
+
+
+    @Primary
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.hikari") //需要导入配置
+    @ConfigurationProperties(prefix = DATASOURCE) //需要导入配置
     public DataSource dataSource(){
         return DataSourceBuilder.create().build();
     }
 
-    @Primary //springboot默认是多数据源，所以你要指定一个主数据源，不然会错误
+    @Primary
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -35,7 +44,7 @@ public class JpaConfig{
         vendorAdapter.setDatabase(Database.MYSQL);//这里指定的你数据库的类型
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("com.swalikh");//这个是你entity所在的包
+        factory.setPackagesToScan(BASEPACKEAGE_ENTITY_SCAN);
         factory.setDataSource(dataSource());
         return factory;
     }

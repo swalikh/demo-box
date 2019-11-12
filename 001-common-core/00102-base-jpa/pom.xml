@@ -15,6 +15,23 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>00102-base-jpa</artifactId>
     <description>本模块主要用于其他模块快速整合jpa，不需要复制粘贴就可以实现测试功能,</description>
+
+    <!--依赖-->
+    <dependencies>
+
+        <dependency>
+            <groupId>com.swalikh</groupId>
+            <artifactId>00101-kernel</artifactId>
+            <version>v5.0</version>
+        </dependency>
+        <!--jpa的依赖==== starter ====-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -27,19 +44,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <!--依赖-->
-    <dependencies>
-
-        <dependency>
-            <groupId>com.swalikh</groupId>
-            <artifactId>00101-kernel</artifactId>
-            <version>v5.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-    </dependencies>
 </project>

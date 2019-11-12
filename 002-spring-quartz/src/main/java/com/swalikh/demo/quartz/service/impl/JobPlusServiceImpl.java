@@ -1,12 +1,16 @@
 package com.swalikh.demo.quartz.service.impl;
 
 
+import com.swalikh.demo.quartz.entity.QrtzJobDetails;
 import com.swalikh.demo.quartz.job.BaseJob;
+import com.swalikh.demo.quartz.repository.QrtzJobDetailsRepository;
 import com.swalikh.demo.quartz.service.JobService;
 import org.quartz.*;
 import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +21,9 @@ public class JobPlusServiceImpl  implements JobService {
 
     @Autowired
     private Scheduler scheduler;
+
+    @Autowired
+    private QrtzJobDetailsRepository jobDetailsRepository;
 
     /**
      * 创建任务
@@ -97,8 +104,16 @@ public class JobPlusServiceImpl  implements JobService {
     }
 
     @Override
-    public List queryJob(String queryKey, String status) {
-        return null;
+    public List queryJob(String groupName,String jobName, String status) {
+        // 1.根据groupName和jobName查询出来所有的任务
+        QrtzJobDetails details = new QrtzJobDetails().setJobGroup(groupName).setJobName(jobName);
+        List<QrtzJobDetails> list = jobDetailsRepository.findAll(Example.of(details));
+        if(!StringUtils.isEmpty(status)){
+            list.forEach( ele -> {
+
+            });
+        }
+        return list;
     }
 
 

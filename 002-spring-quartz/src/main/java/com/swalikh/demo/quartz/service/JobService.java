@@ -20,7 +20,7 @@ public interface JobService {
     void deleteJob(String jobName, String jobGroupName);
 
     //查询job
-    List queryJob(String queryKey, String status);
+    List queryJob(String groupName,String jobName, String status);
 
     //校验job key
     Boolean checkExistsJobKey(String name, String group);

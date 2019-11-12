@@ -27,7 +27,27 @@ spring:
           dataSource:
             qzDS:
               driver: com.mysql.cj.jdbc.Driver
-              URL: jdbc:mysql://192.168.10.14:3307/k8s?characterEncoding=utf-8&useSSL=false&autoReconnect=true&failOverReadOnly=false
+              URL: jdbc:mysql://192.168.10.14:3307/test?useUnicode=true&characterEncoding=UTF8
               user: root
               password: 123456
               maxConnections: 10
+  # 配置JPA
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: mysql
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456    #Nlelpct@1234
+      jdbc-url: jdbc:mysql://192.168.10.14:3307/test?useUnicode=true&characterEncoding=UTF8
+#配置日志
+#logging:
+#  pattern:
+#    console: "[%d{yyyy-MM-dd HH:mm}]-%-5p:%m%n"
+#    file: "[%d{yyyy-MM-dd HH:mm}]-%-5p:%m%n"
+#  level:
+#    root: info
+#  file: log/xxx.log

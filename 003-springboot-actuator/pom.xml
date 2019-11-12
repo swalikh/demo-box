@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 
     <!--父引用-->
     <parent>
@@ -13,11 +13,15 @@
 
     <!--本模块内容-->
     <groupId>com.swalikh</groupId>
+    <artifactId>003-springboot-actuator</artifactId>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>002-spring-quartz</artifactId>
     <version>v5.0</version>
     <description>本工程是一个动态创建和编辑定时任务的Demo，可以用于监控，定时任务等业务上</description>
 
+    <!--指定运行时的java版本-->
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
 
     <!--按需求引入-->
     <dependencies>
@@ -25,31 +29,6 @@
         <dependency>
             <groupId>com.swalikh</groupId>
             <artifactId>00101-kernel</artifactId>
-            <version>v5.0</version>
-        </dependency>
-
-        <!--quartz依赖======== 001.starter ======-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-quartz</artifactId>
-        </dependency>
-        <!--quartz依赖======== 002.c3p0连接池 ======-->
-        <dependency>
-            <groupId>c3p0</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.1.2</version>
-        </dependency>
-        <!--quartz依赖======== 003.mysql驱动 ======-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.18</version>
-        </dependency>
-
-        <!--整合JPA用于数据存储-->
-        <dependency>
-            <groupId>com.swalikh</groupId>
-            <artifactId>00102-base-jpa</artifactId>
             <version>v5.0</version>
         </dependency>
 
@@ -65,6 +44,10 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
@@ -74,4 +57,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

@@ -31,7 +31,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.10</version>
-            <scope>provided</scope>
         </dependency>
 
         <!--002-swagger依赖-->
@@ -41,7 +40,7 @@
             <version>2.9.2</version>
         </dependency>
 
-        <!--003-swaggerUI依赖 === 最新版的UI是不一样的，上个版本的UI是 2.7.0 -->
+        <!--003-swaggerUI依赖 === 最新版的UI是不一样的，新版: 2.9.2  旧版: 2.7.0 -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>

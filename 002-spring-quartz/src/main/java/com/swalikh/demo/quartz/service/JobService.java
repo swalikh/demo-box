@@ -22,6 +22,10 @@ public interface JobService {
     //查询job
     List queryJob(String groupName,String jobName, String status);
 
+    List queryAllJobs();
+
+    String getJobStatus(String jobName,String groupName);
+
     //校验job key
     Boolean checkExistsJobKey(String name, String group);
 

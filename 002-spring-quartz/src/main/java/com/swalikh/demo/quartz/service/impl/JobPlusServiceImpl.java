@@ -2,21 +2,22 @@ package com.swalikh.demo.quartz.service.impl;
 
 
 import com.swalikh.demo.quartz.entity.QrtzJobDetails;
+import com.swalikh.demo.quartz.entity.QrtzTriggers;
 import com.swalikh.demo.quartz.job.BaseJob;
 import com.swalikh.demo.quartz.repository.QrtzJobDetailsRepository;
+import com.swalikh.demo.quartz.repository.QrtzTriggersRepository;
 import com.swalikh.demo.quartz.service.JobService;
+import com.swalikh.kernel.utils.TimeUtils;
 import org.quartz.*;
 import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
-public class JobPlusServiceImpl  implements JobService {
+public class JobPlusServiceImpl implements JobService {
 
 
     @Autowired
@@ -24,6 +25,9 @@ public class JobPlusServiceImpl  implements JobService {
 
     @Autowired
     private QrtzJobDetailsRepository jobDetailsRepository;
+
+    @Autowired
+    private QrtzTriggersRepository qrtzTriggersRepository;
 
     /**
      * 创建任务
@@ -74,7 +78,7 @@ public class JobPlusServiceImpl  implements JobService {
      * 重新设置任务
      */
     @Override
-    public void rescheduleJob(String jobName, String jobGroupName, String cronExpression,String desc) {
+    public void rescheduleJob(String jobName, String jobGroupName, String cronExpression, String desc) {
         try {
             TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroupName);
             // 表达式调度构建器
@@ -104,23 +108,66 @@ public class JobPlusServiceImpl  implements JobService {
     }
 
     @Override
-    public List queryJob(String groupName,String jobName, String status) {
-        // 1.根据groupName和jobName查询出来所有的任务
-        QrtzJobDetails details = new QrtzJobDetails().setJobGroup(groupName).setJobName(jobName);
-        List<QrtzJobDetails> list = jobDetailsRepository.findAll(Example.of(details));
-        if(!StringUtils.isEmpty(status)){
-            list.forEach( ele -> {
+    public List queryJob(String groupName, String jobName, String status) {
+        return queryAllJobs();
+    }
 
-            });
+    @Override
+    public List queryAllJobs() {
+        List<QrtzJobDetails> list = jobDetailsRepository.findAll(Example.of(new QrtzJobDetails()));
+        List<Map<String, String>> result = new ArrayList<>();
+        list.forEach(ele -> {
+            String jobName = ele.getJobName();
+            String groupName = ele.getJobGroup();
+            Map<String, String> job = new HashMap<>();
+            try {
+                JobDetail jobDetail = scheduler.getJobDetail(new JobKey(jobName, groupName));
+                TriggerKey triggerKey = TriggerKey.triggerKey(jobName, groupName);
+                CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
+                job.put("jobName", jobName);                             // 1.jobName 名字
+                job.put("groupName", groupName);                         // 2.groupName 组名
+                job.put("jobClass", jobDetail.getJobClass().getName());  // 3.jobClass
+                job.put("cron", trigger.getCronExpression());            // 4.cron 表达式
+                job.put("desc", ele.getDESCRIPTION());                   // 5.desc 描述
+                job.put("status", getJobStatus(jobName, groupName));     // 6.status 当前job状态
+                job.put("lastFire", TimeUtils.
+                        forMatTime(trigger.getPreviousFireTime(),
+                                "yyyy-MM-dd HH:ss"));               // 7.上次触发时间
+                job.put("nextFire", TimeUtils.
+                        forMatTime(trigger.getNextFireTime(),
+                                "yyyy-MM-dd HH:ss"));               // 8.下次触发时间
+
+                result.add(job);
+            } catch (SchedulerException e) {
+                e.printStackTrace();
+            }
+        });
+        return result;
+    }
+
+    @Override
+    public String getJobStatus(String jobName, String groupName) {
+        Optional<QrtzTriggers> one = qrtzTriggersRepository.findOne(Example.of(new QrtzTriggers().setJobGroup(groupName).setJobName(jobName)));
+        if (one.isPresent()) {
+            String state = one.get().getTriggerState();
+            if ("PAUSED".equals(state)) {
+                return "暂停执行";
+            } else if ("ACQUIRED".equals(state)) {
+                return "正在执行";
+            } else if ("WAITING".equals(state)) {
+                return "等待执行";
+            } else {
+                return "其他";
+            }
         }
-        return list;
+        return "异常";
     }
 
 
     @Override
-    public Boolean checkExistsJobKey(String name,String group) {
+    public Boolean checkExistsJobKey(String name, String group) {
         try {
-            return scheduler.checkExists(new JobKey(name,group));
+            return scheduler.checkExists(new JobKey(name, group));
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -155,7 +202,7 @@ public class JobPlusServiceImpl  implements JobService {
         Class<?> clazz;
         try {
             clazz = Class.forName(classname);
-            BaseJob job =(BaseJob)clazz.newInstance();
+            BaseJob job = (BaseJob) clazz.newInstance();
             return job;
         } catch (Exception e) {
             e.printStackTrace();

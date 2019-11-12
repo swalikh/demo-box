@@ -1,17 +1,16 @@
 package com.swalikh.demo.quartz.entity;
 
+import com.swalikh.demo.quartz.config.JobDetailPrimaryKey;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "QRTZ_JOB_DETAILS")
 @Data
+@IdClass(JobDetailPrimaryKey.class)
 @Accessors(chain = true)
 public class QrtzJobDetails implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -20,9 +19,11 @@ public class QrtzJobDetails implements Serializable {
   @Column(name = "SCHED_NAME", insertable = false, nullable = false)
   private String schedName;
 
+  @Id
   @Column(insertable = false, name = "JOB_NAME", nullable = false)
   private String jobName;
 
+  @Id
   @Column(insertable = false, name = "JOB_GROUP", nullable = false)
   private String jobGroup;
 

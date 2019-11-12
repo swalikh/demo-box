@@ -1,16 +1,16 @@
 package com.swalikh.demo.quartz.entity;
 
+import com.swalikh.demo.quartz.config.TriggersPrimaryKey;
 import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.experimental.Accessors;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
 @Entity
+@IdClass(TriggersPrimaryKey.class)
 @Table(name = "QRTZ_TRIGGERS")
+@Accessors(chain = true)
 public class QrtzTriggers implements Serializable {
   private static final long serialVersionUID = 1L;
 
@@ -18,9 +18,11 @@ public class QrtzTriggers implements Serializable {
   @Column(name = "SCHED_NAME", insertable = false, nullable = false)
   private String schedName;
 
+  @Id
   @Column(insertable = false, name = "TRIGGER_NAME", nullable = false)
   private String triggerName;
 
+  @Id
   @Column(name = "TRIGGER_GROUP", insertable = false, nullable = false)
   private String triggerGroup;
 

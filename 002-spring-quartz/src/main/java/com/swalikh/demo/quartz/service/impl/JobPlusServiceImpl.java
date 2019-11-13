@@ -13,8 +13,11 @@ import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class JobPlusServiceImpl implements JobService {
@@ -109,11 +112,22 @@ public class JobPlusServiceImpl implements JobService {
 
     @Override
     public List queryJob(String groupName, String jobName, String status) {
-        return queryAllJobs();
+        List<Map<String, String>> list = queryAllJobs();
+        Stream<Map<String, String>> stream = list.stream();
+        if(!StringUtils.isEmpty(groupName)){
+            stream = stream.filter(map -> map.get("groupName").equals(groupName));
+        }
+        if(!StringUtils.isEmpty(jobName)){
+            stream = stream.filter(map -> map.get("jobName").equals(jobName));
+        }
+        if(!StringUtils.isEmpty(status)){
+            stream = stream.filter(map -> map.get("status").equals(status));
+        }
+        return stream.collect(Collectors.toList());
     }
 
     @Override
-    public List queryAllJobs() {
+    public List<Map<String, String>> queryAllJobs() {
         List<QrtzJobDetails> list = jobDetailsRepository.findAll(Example.of(new QrtzJobDetails()));
         List<Map<String, String>> result = new ArrayList<>();
         list.forEach(ele -> {

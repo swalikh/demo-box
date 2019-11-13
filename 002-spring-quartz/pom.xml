@@ -28,6 +28,13 @@
             <version>v5.0</version>
         </dependency>
 
+        <!--整合JPA用于数据存储-->
+        <dependency>
+            <groupId>com.swalikh</groupId>
+            <artifactId>00102-base-jpa</artifactId>
+            <version>v5.0</version>
+        </dependency>
+
         <!--quartz依赖======== 001.starter ======-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -44,13 +51,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.18</version>
-        </dependency>
-
-        <!--整合JPA用于数据存储-->
-        <dependency>
-            <groupId>com.swalikh</groupId>
-            <artifactId>00102-base-jpa</artifactId>
-            <version>v5.0</version>
         </dependency>
 
         <!-- 引入Actuator监控依赖 -->

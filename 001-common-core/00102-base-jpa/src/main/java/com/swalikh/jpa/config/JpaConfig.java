@@ -1,4 +1,4 @@
-package com.swalikh.demo.quartz.config;
+package com.swalikh.jpa.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -12,13 +12,14 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(basePackages={JpaConfig.BASEPACKEAGE_REPOSITORY_SCAN})
 @EnableTransactionManagement
-public class JpaConfig{
+public class JpaConfig {
 
 
     //--001.这个是你Repositorie所在的包

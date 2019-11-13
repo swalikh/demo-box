@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by lcy on 2017/11/8.
- */
+
 @Api(value = "任务", tags = "任务管理服务的api")
 @RequestMapping("/job-admin")
 @RestController
@@ -31,7 +29,7 @@ public class JobController {
         return Result.ok("OK");
     }
 
-    @ApiOperation("异常")
+    @ApiOperation("异常捕捉测试")
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     @ResponseBody
     public Result addJob() {

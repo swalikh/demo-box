@@ -7,12 +7,11 @@
 
 ~~~~
 001-common-core: 公共依赖
-    |---00101-kernel        公用工具 公用jar 公用实体 全局异常处理
-    |---00102-base-jpa      jpa依赖以及base包装---用于快速整合jpa
-    |---00103-           
-~~~~
-~~~~
-002-spring-quartz: 用于动态创建和管理时间调度任务
+    |---00101-kernel      ---->   公用工具 公用jar 公用实体 全局异常处理
+    |---00102-base-jpa    ---->   jpa依赖以及base包装---用于快速整合jpa       
+002-spring-quartz         ---->   用于动态创建和管理时间调度任务
+003-springboot-actuator   ---->   用于微服务监控数据采集
+004-springboot-websocket  ---->   用于服务端主动给客户端发送消息
 ~~~~
 
 

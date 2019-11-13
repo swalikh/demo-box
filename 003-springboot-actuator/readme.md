@@ -10,7 +10,6 @@
     |---src
         |---main
             |---java(com.swalikh.demo)
-                |---config          // jpa的配置类 本项目的jpa使用的快速整合
                 |---SpringBootActuatorApp.java
             |---resources
                 |---application.yml

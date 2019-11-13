@@ -25,6 +25,7 @@
         <module>001-common-core</module>
         <module>002-spring-quartz</module>
         <module>003-springboot-actuator</module>
+        <module>004-springboot-websocket</module>
     </modules>
 
 

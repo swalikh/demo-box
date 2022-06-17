@@ -51,7 +51,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.62</version>
+            <version>1.2.83</version>
         </dependency>
 
         <!--005-所有的服务基本都是web服务，所以在core里面统一引入 -->
